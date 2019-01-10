@@ -2,73 +2,85 @@
  Class variable declarations here
  */
 Spaceship player1;
-//Asteroid[] asteroids;
-//Star[] starField;
+Star[] star = new Star[200];
+Asteroid[] astroid = new Asteroid[10];
+Spaceship[] starship = new Spaceship[1];
+Bullet[] laser = new Bullet[1];
+float x_pos, y_pos;
+float speed, direction;
+boolean ROTATE_LEFT;
+boolean ROTATE_RIGHT;
+boolean MOVE_FORWARD;
+boolean MOVE_BACKWARD;
+boolean SPACE_BAR;
+int x_bon = -10;
+int y_bon = -2;
 
 
-/*
-  Track User keyboard input
- */
-boolean ROTATE_LEFT;  //User is pressing <-
-boolean ROTATE_RIGHT; //User is pressing ->
-boolean MOVE_FORWARD; //User is pressing ^ arrow
-boolean SPACE_BAR;    //User is pressing space bar
-
-  
 /* * * * * * * * * * * * * * * * * * * * * * *
-  Initialize all of your variables and game state here
+ Initialize all of your variables and game state here
  */
 public void setup() {
-  size(640, 400);
-  
-  //initialize your asteroid array and fill it
-  
-  //initialize ship
-  
-  //initialize starfield
+  size(750, 550);
+  x_pos = width/2;
+  y_pos = height/2;
+  speed = 1;
+  direction = 255;
+  for (int i = 0; i < star.length; i++) {
+    star[i] = new Star(width/2, height/2);
+  }  
+  for (int i = 0; i < astroid.length; i++) {
+    astroid[i] = new Asteroid(width/2, height/2);
+  }
+  starship[0] = new Spaceship(width/2, height/2);
+  laser[0] = new Bullet(width/2, height/2);
 }
 
 
 /* * * * * * * * * * * * * * * * * * * * * * *
-  Drawing work here
+ Drawing work here
  */
 public void draw() {
-  //your code here
   background(0);
-  
-  //Draw Starfield first 
-  //TODO: Part I
-  
-  //Check bullet collisions
-  //TODO: Part III or IV - for not just leave this comment
+  for (int i = 0; i < star.length; i++) {
+    star[i].show();
+  }
+  for (int i = 0; i < astroid.length; i++) {
+    astroid[i].show();
+  }
+  if (ROTATE_LEFT)
+    direction -= 5.0;
+  if (ROTATE_RIGHT)
+    direction += 5.0;
+  if (MOVE_FORWARD == true) {
+    if (speed < 3) {
+      speed += .3;
+    }
+  } else {
+    if (speed > 0) {
+      speed -= .5;
+    }
+    if (speed < 0)
+      speed = 0;
+  }
+  if (MOVE_BACKWARD == true) {
+    if (speed > 0) {
+      speed -= 1;
+      MOVE_FORWARD = false;
+    }
+  }
 
-  //TODO: Part II, Update each of the Asteroids internals
+  x_pos = x_pos + speed*(float)Math.cos(radians(direction));
+  y_pos = y_pos + speed*(float)Math.sin(radians(direction));
 
-  //Check for asteroid collisions against other asteroids and alter course
-  //TODO: Part III, for now keep this comment in place
-
-  //Draw asteroids
-  //TODO: Part II
-
-  //Update spaceship
-  //TODO: Part I
-  
-  //Check for ship collision agaist asteroids
-  //TODO: Part II or III
-
-  //Draw spaceship & and its bullets
-  //TODO: Part I, for now just render ship
-  //TODO: Part IV - we will use a new feature in Java called an ArrayList, 
-  //so for now we'll just leave this comment and come back to it in a bit. 
-  
-  //Update score
-  //TODO: Keep track of a score and output the score at the top right
+  starship[0].show();
+//  laser[0].show();
 }
 
 
 
 /* * * * * * * * * * * * * * * * * * * * * * *
-  Record relevent key presses for our game
+ Record relevent key presses for our game
  */
 void keyPressed() {
   if (key == CODED) {
@@ -90,7 +102,7 @@ void keyPressed() {
 
 
 /* * * * * * * * * * * * * * * * * * * * * * *
-  Record relevant key releases for our game.
+ Record relevant key releases for our game.
  */
 void keyReleased() {  
   if (key == CODED) { 
