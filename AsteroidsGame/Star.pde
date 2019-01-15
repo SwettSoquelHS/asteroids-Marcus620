@@ -1,20 +1,20 @@
 //note that this class does NOT *NEED* to extend Mover but can if you like
 class Star {
-  float x_pos;
-  float y_pos;
+  float starx_pos;
+  float stary_pos;
 
   Star(int x, int y) {
-    x_pos = (int)(Math.random() * 750);
-    y_pos = (int)(Math.random() * 550);
+    starx_pos = (int)(Math.random() * 750);
+    stary_pos = (int)(Math.random() * 550);
   }
 
   void show() {
     fill(255);
-    ellipse(x_pos, y_pos, 5, 5);
-    x_pos = x_pos - .02;
+    ellipse(starx_pos, stary_pos, 5, 5);
+    starx_pos = starx_pos - .02;
    
-   if(x_pos < 0){
-    x_pos = 750; 
+   if(starx_pos < 0){
+    starx_pos = 750; 
    }
   }
   

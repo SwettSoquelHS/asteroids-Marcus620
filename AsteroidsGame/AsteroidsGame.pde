@@ -5,14 +5,16 @@ Spaceship player1;
 Star[] star = new Star[200];
 Asteroid[] astroid = new Asteroid[10];
 Spaceship[] starship = new Spaceship[1];
-Bullet[] laser = new Bullet[1];
-float x_pos, y_pos;
+Bullet[] laser = new Bullet[1000];
+float x_pos;
+float y_pos;
 float speed, direction;
 boolean ROTATE_LEFT;
 boolean ROTATE_RIGHT;
 boolean MOVE_FORWARD;
 boolean MOVE_BACKWARD;
 boolean SPACE_BAR;
+boolean Asteroids_Touching;
 int x_bon = -10;
 int y_bon = -2;
 
@@ -32,8 +34,10 @@ public void setup() {
   for (int i = 0; i < astroid.length; i++) {
     astroid[i] = new Asteroid(width/2, height/2);
   }
+  for (int i = 0; i < laser.length; i++) {
+    laser[1] = new Bullet(width/2, height/2);
+  }
   starship[0] = new Spaceship(width/2, height/2);
-  laser[0] = new Bullet(width/2, height/2);
 }
 
 
@@ -74,7 +78,12 @@ public void draw() {
   y_pos = y_pos + speed*(float)Math.sin(radians(direction));
 
   starship[0].show();
-//  laser[0].show();
+
+  if (SPACE_BAR == true) {
+    //    for (int i = 0; i < laser.length; i++) {
+    laser[1].show();
+  }
+  //  }
 }
 
 
@@ -93,8 +102,7 @@ void keyPressed() {
     }
   }
 
-  //32 is spacebar
-  if (keyCode == 32) {  
+  if (keyCode == 32) {
     SPACE_BAR = true;
   }
 }
@@ -114,7 +122,18 @@ void keyReleased() {
       MOVE_FORWARD = false;
     }
   }
-  if (keyCode == 32) {
-    SPACE_BAR = false;
-  }
 }
+
+
+
+//void checkOnAsteroids() {
+//  for (int i = 0; i < astroid.length; i++) {
+//    Asteroid a1 = astroid[i];
+//    for (int j = 0; j < astroid.length; j++) {
+//      Asteroid a2 = astroid[j];
+//      if (a1 != a2 && a1.collidingWith(a2)) {
+//        Asteroids_Touching = true;
+//      }
+//    }
+//  }
+//}

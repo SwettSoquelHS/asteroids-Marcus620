@@ -4,7 +4,7 @@
  You may add additional methods to this class, for example "rotate" and "accelerate" 
  might be useful.
  */
-class Spaceship {   
+public class Spaceship {   
   int time = 0;
 
   Spaceship(int x, int y) {

@@ -6,8 +6,9 @@
  but the final program should use "beginShap(), vertex(), and endShape()"
  to render the asteroid.
  */
-class Asteroid {   
-  int size =(int) random(30, 70);
+class Asteroid  {   
+  int ran_size =(int) random(1, 4);
+  int size;
   float x_ran, y_ran;
   float ran_direction = (int) random (1, 5);
 
@@ -19,6 +20,15 @@ class Asteroid {
   void show() {
     fill(#441B09);
     stroke(1);
+    if (ran_size == 1) {
+      size = 30;
+    }
+    if (ran_size == 2) {
+      size = 55;
+    }
+    if (ran_size == 3) {
+      size = 85;
+    }
     ellipse(x_ran, y_ran, size, size);
 
     if (ran_direction == 1) {
