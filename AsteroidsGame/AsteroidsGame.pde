@@ -92,14 +92,12 @@ public void draw() {
  Record relevent key presses for our game
  */
 void keyPressed() {
-  if (key == CODED) {
-    if (keyCode == LEFT) {
-      ROTATE_LEFT = true;
-    } else if ( keyCode == RIGHT ) {
-      ROTATE_RIGHT = true;
-    } else if (keyCode == UP) {
-      MOVE_FORWARD = true;
-    }
+  if (key == 'a') {
+    ROTATE_LEFT = true;
+  } else if ( key == 'd') {
+    ROTATE_RIGHT = true;
+  } else if (key == 'w') {
+    MOVE_FORWARD = true;
   }
 
   if (keyCode == 32) {
@@ -108,19 +106,16 @@ void keyPressed() {
 }
 
 
-
 /* * * * * * * * * * * * * * * * * * * * * * *
  Record relevant key releases for our game.
  */
 void keyReleased() {  
-  if (key == CODED) { 
-    if (keyCode == LEFT) {
-      ROTATE_LEFT = false;
-    } else if ( keyCode == RIGHT ) {
-      ROTATE_RIGHT = false;
-    } else if (keyCode == UP) {
-      MOVE_FORWARD = false;
-    }
+  if (key == 'a') {
+    ROTATE_LEFT = false;
+  } else if ( key == 'd') {
+    ROTATE_RIGHT = false;
+  } else if (key == 'w') {
+    MOVE_FORWARD = false;
   }
 }
 
