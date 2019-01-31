@@ -1,6 +1,3 @@
-/* * * * * * * * * * * * * * * * * * * * * * *
- Class variable declarations here
- */
 Spaceship player1;
 Star[] star = new Star[200];
 Asteroid[] astroid = new Asteroid[10];
@@ -18,10 +15,8 @@ boolean Asteroids_Touching;
 int x_bon = -10;
 int y_bon = -2;
 
+/* * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * *
- Initialize all of your variables and game state here
- */
 public void setup() {
   size(750, 550);
   x_pos = width/2;
@@ -41,9 +36,7 @@ public void setup() {
 }
 
 
-/* * * * * * * * * * * * * * * * * * * * * * *
- Drawing work here
- */
+/* * * * * * * * * * * * * * * * * * * * * * * */
 public void draw() {
   background(0);
   for (int i = 0; i < star.length; i++) {
@@ -88,9 +81,7 @@ public void draw() {
 
 
 
-/* * * * * * * * * * * * * * * * * * * * * * *
- Record relevent key presses for our game
- */
+/* * * * * * * * * * * * * * * * * * * * * * * */
 void keyPressed() {
   if (key == 'a') {
     ROTATE_LEFT = true;
@@ -106,9 +97,7 @@ void keyPressed() {
 }
 
 
-/* * * * * * * * * * * * * * * * * * * * * * *
- Record relevant key releases for our game.
- */
+/* * * * * * * * * * * * * * * * * * * * * * * */
 void keyReleased() {  
   if (key == 'a') {
     ROTATE_LEFT = false;
