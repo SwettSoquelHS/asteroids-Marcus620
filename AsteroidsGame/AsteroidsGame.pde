@@ -1,11 +1,8 @@
 Spaceship player1;
 Star[] star = new Star[200];
 Asteroid[] astroid = new Asteroid[10];
-Spaceship[] starship = new Spaceship[1];
-Bullet[] laser = new Bullet[1000];
-float x_pos;
-float y_pos;
-float speed, direction;
+Spaceship starship;
+ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 boolean ROTATE_LEFT;
 boolean ROTATE_RIGHT;
 boolean MOVE_FORWARD;
@@ -19,20 +16,13 @@ int y_bon = -2;
 
 public void setup() {
   size(750, 550);
-  x_pos = width/2;
-  y_pos = height/2;
-  speed = 1;
-  direction = 255;
   for (int i = 0; i < star.length; i++) {
     star[i] = new Star(width/2, height/2);
   }  
   for (int i = 0; i < astroid.length; i++) {
     astroid[i] = new Asteroid(width/2, height/2);
   }
-  for (int i = 0; i < laser.length; i++) {
-    laser[1] = new Bullet(width/2, height/2);
-  }
-  starship[0] = new Spaceship(width/2, height/2);
+  starship = new Spaceship(width/2, height/2, 0, 180);
 }
 
 
@@ -45,37 +35,22 @@ public void draw() {
   for (int i = 0; i < astroid.length; i++) {
     astroid[i].show();
   }
-  if (ROTATE_LEFT)
-    direction -= 5.0;
-  if (ROTATE_RIGHT)
-    direction += 5.0;
-  if (MOVE_FORWARD == true) {
-    if (speed < 3) {
-      speed += .3;
-    }
-  } else {
-    if (speed > 0) {
-      speed -= .5;
-    }
-    if (speed < 0)
-      speed = 0;
-  }
-  if (MOVE_BACKWARD == true) {
-    if (speed > 0) {
-      speed -= 1;
-      MOVE_FORWARD = false;
-    }
+
+  starship.show();
+  starship.update();
+
+  for (Bullet b : bullets) {
+    b.update();
+    b.show();
   }
 
-  x_pos = x_pos + speed*(float)Math.cos(radians(direction));
-  y_pos = y_pos + speed*(float)Math.sin(radians(direction));
-
-  starship[0].show();
-
-  if (SPACE_BAR == true) {
-    //    for (int i = 0; i < laser.length; i++) {
-    laser[1].show();
+  ArrayList<Bullet> removeBullet = new ArrayList<Bullet>(); //prevents ConcurrentModificationException
+  for (Bullet b : bullets) {
+    if (b.off) {
+      removeBullet.add(b);
+    }
   }
+  bullets.removeAll(removeBullet);
   //  }
 }
 
@@ -92,7 +67,8 @@ void keyPressed() {
   }
 
   if (keyCode == 32) {
-    SPACE_BAR = true;
+    Bullet b = new Bullet(starship.x, starship.y);
+    bullets.add(b);
   }
 }
 

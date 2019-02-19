@@ -7,7 +7,7 @@
  to render the asteroid.
  */
 class Asteroid {   
-  int ran_size =(int) random(1, 4);
+  int ran_size = (int) random(1, 4);
   int size;
   float x_ran, y_ran;
   float ran_direction = (int) random (1, 5);
@@ -29,20 +29,20 @@ class Asteroid {
   void show() {
     fill(#441B09);
     stroke(1);
-
     pushMatrix();
     translate(x_ran, y_ran);
     beginShape();
-    vertex(random(550, 565), random(225, 245));
-    vertex(random(530, 540), random(220, 225));
-    vertex(random(505, 515), random(220, 240));
-    vertex(random(490, 500), random(190, 210));
-    vertex(random(490, 510), random(170, 190));
-    vertex(random(520, 530), random(150, 170));
-    vertex(random(550, 570), random(140, 160));
-    vertex(random(565, 575), random(175, 185));
+    vertex(30, 30);
+    vertex(0, 45);
+    vertex(-30, 30);
+    vertex(-45, 0);
+    vertex(-30, -30);
+    vertex(0, -45);
+    vertex(30, -30);
+    vertex(45, 0);
     endShape();
     popMatrix();
+
 
     if (ran_direction == 1) {
       x_ran = x_ran + .5;

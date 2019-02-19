@@ -1,8 +1,12 @@
-class Bullet {
+class Bullet extends Mover{
   float x_pos;
   float y_pos;
-
-  Bullet(int x, int y) {
+  boolean off;
+  
+  Bullet(float x, float y) {
+    x_pos = x;
+    y_pos = y;
+    off = false;
   }
 
   void show() {
@@ -22,6 +26,13 @@ class Bullet {
     }
     if (y_pos < -15) {
       y_pos = 565;
+    }
+  }
+  
+  void update(){
+    if(x_pos > width+10 || x_pos < -10 || 
+      y_pos > height+10 || y_pos < -10){
+        off = true;
     }
   }
 }

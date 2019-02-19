@@ -4,12 +4,11 @@
  You may add additional methods to this class, for example "rotate" and "accelerate" 
  might be useful.
  */
-public class Spaceship {   
+public class Spaceship extends Mover{   
   int time = 0;
 
-  Spaceship(int x, int y) {
-    x_pos = 375;
-    y_pos = 275;
+  Spaceship(int x, int y, float speed, float direction) {
+    super(x, y, speed, direction);
   }
 
   void show() {
@@ -17,7 +16,7 @@ public class Spaceship {
     pushMatrix();
     noStroke();
     fill(60);
-    translate(x_pos, y_pos);
+    translate(x, y);
     rotate(radians(direction));
     rect(-15, 10, 30, 5);
     rect(-15, -15, 30, 5);
@@ -37,20 +36,42 @@ public class Spaceship {
       time = 0;
     }
     triangle(-40, 0, -20, -6, -20, 6);
-    
-    
-    if(x_pos > 765){
-     x_pos = -10; 
+
+
+    if (x > 765) {
+      x = -10;
     }
-    if(x_pos < -15){
-     x_pos = 750; 
+    if (x < -15) {
+      x = 750;
     }
-    if(y_pos > 565){
-     y_pos = -10; 
+    if (y > 565) {
+      y = -10;
     }
-    if(y_pos < -15){
-     y_pos = 565; 
+    if (y < -15) {
+      y = 565;
     }
     popMatrix();
+  }
+
+  void update() {
+    if (ROTATE_LEFT) {
+      direction -= 5.0;
+    }
+    if (ROTATE_RIGHT) {
+      direction += 5.0;
+    }
+    if (MOVE_FORWARD == true) {
+      if (speed < 3) {
+        speed += .3;
+      }
+    }
+    if (MOVE_FORWARD == false) {
+      if (speed > 0) {
+        speed -= .1;
+      } else {
+        speed = 0;
+      }
+    }
+    super.update();
   }
 }
