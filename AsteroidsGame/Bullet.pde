@@ -1,8 +1,9 @@
-class Bullet extends Mover{
+class Bullet {
   float x_pos;
   float y_pos;
   boolean off;
-  
+  int bullettime = 0;
+
   Bullet(float x, float y) {
     x_pos = x;
     y_pos = y;
@@ -28,11 +29,11 @@ class Bullet extends Mover{
       y_pos = 565;
     }
   }
-  
-  void update(){
-    if(x_pos > width+10 || x_pos < -10 || 
-      y_pos > height+10 || y_pos < -10){
-        off = true;
+
+  void update() {
+    if (x_pos > width+10 || x_pos < -10 || 
+      y_pos > height+10 || y_pos < -10) {
+      off = true;
     }
   }
 }
